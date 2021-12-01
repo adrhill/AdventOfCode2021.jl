@@ -1,0 +1,7 @@
+name = "aoc-2021-julia"
+uuid = "ef1c3f9d-7b9b-4ab9-80f7-f08e8c6162b6"
+authors = ["Adrian Hill"]
+version = "0.1.0"
+
+[compat]
+julia = "1.7"
