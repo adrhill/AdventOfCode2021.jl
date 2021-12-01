@@ -1,4 +1,4 @@
-data_d01() = parse.(Int, (readlines("2021/data/day_1.txt")))
+data_d01() = parse.(Int, (readlines("../data/day01.txt")))
 
 # Part 1
 count_increases(A::AbstractVector{<:Integer}) = sum(x -> x > 0, diff(A))

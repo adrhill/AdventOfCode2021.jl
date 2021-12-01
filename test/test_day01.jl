@@ -1,8 +1,5 @@
-using AdventOfCode
 using AdventOfCode2021: data_d01, count_increases
 using AdventOfCode2021: windowed_sums, windowed_count_increases
-
-setup_files(2021, 1) # download files
 
 testdata = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
 
