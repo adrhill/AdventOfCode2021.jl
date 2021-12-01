@@ -1,7 +1,16 @@
-name = "aoc-2021-julia"
+name = "AdventOfCode2021"
 uuid = "ef1c3f9d-7b9b-4ab9-80f7-f08e8c6162b6"
 authors = ["Adrian Hill"]
 version = "0.1.0"
 
+[deps]
+
 [compat]
 julia = "1.7"
+
+[extras]
+AdventOfCode = "7ef4cfdd-3fec-4d8b-b242-bcc5161d01d5"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test", "AdventOfCode"]

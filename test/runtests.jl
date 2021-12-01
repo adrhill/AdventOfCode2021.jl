@@ -1,6 +1,8 @@
-using aoc-2021-julia
+using AdventOfCode2021
 using Test
 
-@testset "aoc-2021-julia.jl" begin
-    # Write your tests here.
+@testset "AdventOfCode2021" begin
+    @testset "Day 01" begin
+        include("test_day01.jl")
+    end
 end
