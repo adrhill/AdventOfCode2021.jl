@@ -5,4 +5,7 @@ using Test
     @testset "Day 01" begin
         include("test_day01.jl")
     end
+    @testset "Day 02" begin
+        include("test_day02.jl")
+    end
 end
