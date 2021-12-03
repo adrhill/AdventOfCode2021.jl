@@ -1,7 +1,7 @@
 function data_d03()
     return BitMatrix(
         permutedims(
-            reduce(hcat, [[c == '1' for c in line] for line in readlines("data/day03.txt")])
+            reduce(hcat, [[c == '1' for c in line] for line in readlines("../data/day03.txt")])
         ),
     )
 end
