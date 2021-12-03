@@ -8,4 +8,7 @@ using Test
     @testset "Day 02" begin
         include("test_day02.jl")
     end
+    @testset "Day 03" begin
+        include("test_day03.jl")
+    end
 end
