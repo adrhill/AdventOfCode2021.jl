@@ -2,7 +2,7 @@ abstract type Direction end
 struct Forward <: Direction end
 struct Up <: Direction end
 struct Down <: Direction end
-const Command = Tuple{<:Direction, <:Integer}
+const Command = Tuple{<:Direction,<:Integer}
 
 const directions = Dict("forward" => Forward(), "up" => Up(), "down" => Down())
 

@@ -74,7 +74,7 @@ end
 #  Range (min … max):  2.083 ms … 8.649 ms  ┊ GC (min … max):  0.00% … 67.02%
 #  Time  (median):     2.537 ms             ┊ GC (median):     0.00%
 #  Time  (mean ± σ):   3.052 ms ± 1.329 ms  ┊ GC (mean ± σ):  16.54% ± 20.25%
-
+#
 #      ▅██▆▃                                      ▁▂▁   ▁
 #   ▄▁▆███████▅▄▁▅▄▄▄▁▁▁▄▄▁▄▁▄▄▅▄▁▁▁▁▁▁▁▁▁▁▁▁▁▄▄▄▇███████▇█▇▇ █
 #   2.08 ms     Histogram: log(frequency) by time     6.93 ms <
