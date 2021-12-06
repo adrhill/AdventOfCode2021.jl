@@ -17,4 +17,7 @@ using Test
     @testset "Day 05" begin
         include("test_day05.jl")
     end
+    @testset "Day 06" begin
+        include("test_day06.jl")
+    end
 end
