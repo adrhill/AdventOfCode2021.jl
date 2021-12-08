@@ -3,3 +3,4 @@
 *.jl.mem
 *.vscode
 *2021
+*.DS_Store
