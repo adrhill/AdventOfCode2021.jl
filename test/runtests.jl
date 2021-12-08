@@ -3,7 +3,7 @@ using Printf
 using Test
 
 @testset "AdventOfCode2021" begin
-    for day in 1:CURRENT_DAY
+    for day in CURRENT_DAY:-1:1 # get current results first
         testset_name = @sprintf("Day %02d", day)
         @testset "$testset_name" begin
             D = Day(day)
