@@ -1,23 +1,18 @@
 using AdventOfCode2021
+using Printf
 using Test
 
 @testset "AdventOfCode2021" begin
-    @testset "Day 01" begin
-        include("test_day01.jl")
+    for day in 1:CURRENT_DAY
+        testset_name = @sprintf("Day %02d", day)
+        @testset "$testset_name" begin
+            D = Day(day)
+            @test test1(D) == testresult1(D)
+            @printf("Solution of Day %2d – Part 1: %d\n", day, solve1(D))
+            @test test2(D) == testresult2(D)
+            @printf("Solution of Day %2d – Part 2: %d\n", day, solve2(D))
+        end
     end
-    @testset "Day 02" begin
-        include("test_day02.jl")
-    end
-    @testset "Day 03" begin
-        include("test_day03.jl")
-    end
-    @testset "Day 04" begin
-        include("test_day04.jl")
-    end
-    @testset "Day 05" begin
-        include("test_day05.jl")
-    end
-    @testset "Day 06" begin
-        include("test_day06.jl")
-    end
+    # println("Solution of Day $(CURRENT_DAY) – Part 1: $(solve1(CURRENT_DAY))")
+    # println("Solution of Day $(CURRENT_DAY) – Part 2: $(solve2(CURRENT_DAY))")
 end

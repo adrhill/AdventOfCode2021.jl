@@ -1,10 +1,16 @@
 module AdventOfCode2021
+using Printf
 
-include("day01.jl")
-include("day02.jl")
-include("day03.jl")
-include("day04.jl")
-include("day05.jl")
-include("day06.jl")
+const CURRENT_DAY = 6
+
+include("dispatch.jl")
+for day in 1:CURRENT_DAY
+    include(@sprintf("day%02d.jl", day))
+end
+
+export Day, CURRENT_DAY
+export data, testdata
+export test1, test2, testresult1, testresult2
+export solve1, solve2
 
 end # module
