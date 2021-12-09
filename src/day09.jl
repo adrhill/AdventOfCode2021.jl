@@ -1,13 +1,13 @@
 # Day 9: Smoke Basin
-load(::Day{9}, path) = parse.(Int, permutedims(hcat(split.(readlines(path), "")...))) # transposed!
+load(::Day{9}, path) = parse.(Int, hcat(split.(readlines(path), "")...)) # transposed!
 
 # Part 1 – find discrete minima in 4-neighborhood
 function is_minimum_in_row(data)
-    A = sign.(diff(data; dims=2))
+    A = diff(data; dims=2)
     return (A[:, 1:(end - 1)] .< 0) .& (A[:, 2:end] .> 0)
 end
 function is_minimum_in_col(data)
-    A = sign.(diff(data; dims=1))
+    A = diff(data; dims=1)
     return (A[1:(end - 1), :] .< 0) .& (A[2:end, :] .> 0)
 end
 function is_minimum(data)
