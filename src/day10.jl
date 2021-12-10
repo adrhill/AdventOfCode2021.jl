@@ -15,7 +15,7 @@ function error_score(line)
     while !isempty(line)
         c = popfirst!(line)
         if is_opening(c)
-            append!(open_chunks, c)
+            push!(open_chunks, c)
         else
             if match_opening[c] == open_chunks[end] # found char matches expected
                 pop!(open_chunks)
@@ -38,7 +38,7 @@ function autocomplete(line)
     while !isempty(line)
         c = popfirst!(line)
         if is_opening(c)
-            append!(open_chunks, c)
+            push!(open_chunks, c)
         else
             if match_opening[c] == open_chunks[end]
                 pop!(open_chunks)
@@ -61,7 +61,7 @@ end
 
 function solve2(::Day{10}, data)
     scores = score_completion.(filter(!isnothing, autocomplete.(data))) # filter errors
-    return sort(scores)[div(length(scores), 2, RoundUp)] # middle score
+    return partialsort!(scores, div(length(scores), 2, RoundUp))
 end
 
 testresult1(::Day{10}) = 26397
