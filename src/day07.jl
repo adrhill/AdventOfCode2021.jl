@@ -1,10 +1,10 @@
-using Statistics: median
+using Statistics: median!
 
 # Data loading
 load(::Day{7}, path) = parse.(Int, split(readline(path), ","))
 
 # Part 1 - fuel of crab submarines
-solve1(::Day{7}, pos) = sum(abs.(pos .- Int(median(pos))))
+solve1(::Day{7}, pos) = sum(abs.(pos .- Int(median!(pos))))
 
 # Part 2 - fuel of crab submarines 2
 @inline triag(n) = div(n * (n + 1), 2) # fuel spent is a triangular number
