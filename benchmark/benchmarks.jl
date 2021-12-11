@@ -1,15 +1,14 @@
-using BenchmarkTools
 using AdventOfCode2021
+using BenchmarkTools
 
-on_CI = haskey(ENV, "GITHUB_ACTIONS")
+TUNE = true
 
 SUITE = BenchmarkGroup()
 for day in 1:CURRENT_DAY
-    groupname = @sprintf("Day %02d", day)
-    Day = Day(day)
-    SUITE[groupname] = BenchmarkGroup(["load data", "solve1", "solve2"])
-    SUITE[groupname]["load data"] = @benchmarkable(data(Day))
-    data = data(Day)
-    SUITE[groupname]["solve1"] = @benchmarkable(solve1(Day), $data)
-    SUITE[groupname]["solve2"] = @benchmarkable(solve2(Day), $data)
+    _Day = Day(day)
+    SUITE["$day"] = BenchmarkGroup(["load", "solve1", "solve2"])
+    SUITE["$day"]["1"] = @benchmarkable data($_Day)
+    _data = data(_Day)
+    SUITE["$day"]["solve1"] = @benchmarkable solve1($_Day, $_data)
+    SUITE["$day"]["solve2"] = @benchmarkable solve2($_Day, $_data)
 end
