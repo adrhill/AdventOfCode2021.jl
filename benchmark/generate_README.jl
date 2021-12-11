@@ -35,16 +35,16 @@ formattime(t) = @sprintf "%.2f μs" t / 1000 # where t = time in ns
 formatmemory(m) = @sprintf "%.2f KiB" m / 1024 # where m = memory in bytes
 
 function day2string(day::Integer)
-    res = results["$day"]
     two_digit_day = @sprintf "%02d" day
 
     # Some hand-crafted strings
     url_task = "https://adventofcode.com/2021/day/$day"
     url_src = "https://github.com/adrhill/AdventOfCode2021.jl/blob/main/src/day$two_digit_day.jl"
-    day_string = """[Task $day]($url_task)<br>([`src`]($url_src))"""
+    day_string = """[Day $day]($url_task)<br>[`src`]($url_src)"""
     functions_string = "`load`<br>`solve1`<br>`solve2`"
 
     # Strings from benchmarks
+    res = results["$day"]
     ks = ["load", "solve1", "solve2"]
     times = join([formattime(mean(res[k]).time) for k in ks], "<br>")
     mems = join([formatmemory(mean(res[k]).memory) for k in ks], "<br>")
@@ -66,8 +66,8 @@ readme_header = """
 Solutions for the [Advent of Code 2021](https://adventofcode.com/2021) in Julia Base without dependencies.
 
 ## Benchmarks
-| Day | Part | Mean time | Memory est. | Allocs est.|
-|:---:|:----:|----------:|------------:|-----------:|"""
+| Day | Part | Mean time | Memory estimate | Allocs estimate|
+|:---:|:----:|----------:|----------------:|---------------:|"""
 
 # Write table to file
 open("README.md", "w") do io
