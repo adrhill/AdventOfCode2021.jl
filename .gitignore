@@ -4,3 +4,4 @@
 *.vscode
 *2021
 *.DS_Store
+*Manifest.toml

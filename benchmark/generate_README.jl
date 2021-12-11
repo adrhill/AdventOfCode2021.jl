@@ -2,8 +2,13 @@ using AdventOfCode2021
 using BenchmarkTools
 using Printf
 
-# Select if benchmarks should be re-tuned
-tune = false
+on_CI = haskey(ENV, "GITHUB_ACTIONS")
+if on_CI
+    tune = true
+else
+    # Select if benchmarks should be re-tuned when run locally
+    tune = false
+end
 
 # Set up benchmarking suite
 suite = BenchmarkGroup()
@@ -70,6 +75,6 @@ Solutions for the [Advent of Code 2021](https://adventofcode.com/2021) in Julia 
 |:---:|:----:|----------:|----------------:|---------------:|"""
 
 # Write table to file
-open("README.md", "w") do io
+open(joinpath(@__DIR__, "..", "README.md"), "w") do io
     write(io, join([readme_header, [day2string(d) for d in 1:CURRENT_DAY]...], "\n"))
 end;
