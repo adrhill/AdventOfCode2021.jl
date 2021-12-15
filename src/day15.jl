@@ -1,56 +1,60 @@
 # Day 15: Chiton
 load(::Day{15}, path) = permutedims(parse.(Int, hcat(split.(readlines(path), "")...)))
 
-# Part 1 – Dynamic programming
-function solve1(::Day{15}, risk)
-    # Dynamic programming iteration:
+# Part 1 – Path finding
+# This old bookmark ended up being a useful reference:
+# https://www.redblobgames.com/pathfinding/a-star/introduction.html
+
+const VN_OFFSETS = [ # von Neumann neighborhood # TODO: refactor Day 9 to use this!
+    CartesianIndex(1, 0),
+    CartesianIndex(-1, 0),
+    CartesianIndex(0, 1),
+    CartesianIndex(0, -1),
+]
+
+function pathfind(risk)
+    # Allocate matrix tracking total risk
     h, w = size(risk)
     totalrisk = fill(typemax(Int), h, w)
 
-    # We start from the exit and walk left, summing up the risk.
-    totalrisk[h, w] = risk[h, w]
-    for col in (w - 1):-1:1
-        totalrisk[h, col] = risk[h, col] + totalrisk[h, col + 1]
-    end
+    # Add starting point to queue
+    risk_start = 0
+    totalrisk[1, 1] = risk_start
+    queue = [(CartesianIndex(1, 1), risk_start)] # index, total risk, heuristic
 
-    function updatetotalrisk!(r, row, col)
-        r < totalrisk[row, col] && (totalrisk[row, col] = r)
-        return nothing
-    end
+    while !isempty(queue)
+        current, risk_so_far = pop!(queue)
 
-    # For every value in a row, we walk up, then all the way left and right,
-    # accumumulating the risk. Only minimal risk is saved.
-    for row in (h - 1):-1:1
-        for col_bottom in 1:w
-            # Update cell above previous row
-            candidate = totalrisk[row + 1, col_bottom] + risk[row, col_bottom]
-            updatetotalrisk!(candidate, row, col_bottom)
-            # Walk left
-            if col_bottom > 1
-                candidate = totalrisk[row, col_bottom]
-                for col_top in (col_bottom - 1):-1:1
-                    candidate += risk[row, col_top]
-                    updatetotalrisk!(candidate, row, col_top)
-                end
-            end
-            # Walk right
-            if col_bottom < w
-                candidate = totalrisk[row, col_bottom]
-                for col_top in (col_bottom + 1):w
-                    candidate += risk[row, col_top]
-                    updatetotalrisk!(candidate, row, col_top)
+        # Return the total risk when a path is found
+        if Tuple(current) == (h, w)
+            return risk_so_far
+        end
+
+        for offset in VN_OFFSETS
+            # Check all neighbors iteratively
+            neighbor = current + offset
+            if checkbounds(Bool, risk, neighbor)
+                new_total = risk_so_far + risk[neighbor]
+                if new_total < totalrisk[neighbor]
+                    totalrisk[neighbor] = new_total
+                    push!(queue, (neighbor, new_total))
                 end
             end
         end
+        # Ideally I'd implement a priority queue, but we'll just sort
+        sort!(queue; by=c -> -c[2])
     end
-    println(totalrisk)
-
-    # "The starting position is never entered, so its risk is not counted",
-    # so we need to substract `risk[1, 1]`.
-    return totalrisk[1, 1] - risk[1, 1]
+    return totalrisk[h, w]
 end
-# function solve2(::Day{15}, data)
-# end
+
+solve1(::Day{15}, data) = pathfind(data)
+
+# Part 2 – tile shifted risk maps and repeat pathfinding
+function solve2(::Day{15}, data; n=5)
+    mats = [mod1.(data .+ shift, 9) for shift in 0:(2 * n - 1)] # tiles
+    risk = hvcat((n), [mats[x + y - 1] for x in 1:n, y in 1:n]...)
+    return pathfind(risk)
+end
 
 testresult1(::Day{15}) = 40
-# testresult2(::Day{15}) =
+testresult2(::Day{15}) = 315
