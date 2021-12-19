@@ -32,7 +32,7 @@ function solve1(::Day{11}, data; steps=100)
 end
 
 # Part 2 - return step in which octopuses synchronize
-function solve2(::Day{11}, data; steps=100)
+function solve2(::Day{11}, data)
     data = deepcopy(data) # in-place `solve1!` could comment out this line for performance
     step = 1
     while true # iterate until value is returned on synchronization

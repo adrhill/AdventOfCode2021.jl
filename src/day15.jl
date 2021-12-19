@@ -20,7 +20,7 @@ function pathfind(risk)
     # Add starting point to queue
     risk_start = 0
     totalrisk[1, 1] = risk_start
-    queue = [(CartesianIndex(1, 1), risk_start)] # index, total risk, heuristic
+    queue = [(CartesianIndex(1, 1), risk_start)] # index, total risk
 
     while !isempty(queue)
         current, risk_so_far = pop!(queue)

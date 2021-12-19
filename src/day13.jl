@@ -64,7 +64,7 @@ function solve2(::Day{13}, data)
     for f in folds
         fold!(positions, f)
     end
-    @show show_code(positions) # worth plugging through ImageCore's `Gray`
+    # @show show_code(positions) # worth plugging through ImageCore's `Gray`
     return 0
 end
 

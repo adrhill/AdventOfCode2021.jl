@@ -1,8 +1,6 @@
 # Day 16: Packet Decoder
-
-# Parse as Int8 as there is not Int4 datatype, but only keep last 4 digits.
-# This returns the "BITS" representation of our data:
-function hex2bits(hex)
+function hex2bits(hex) # "BITS" representation of our data
+    # Parse as Int8 as there is not Int4 datatype, but only keep last 4 digits.
     return Vector{Char}(
         join(bitstring(i)[5:8] for i in parse.(Int8, split(hex, ""), base=16))
     )
@@ -41,7 +39,7 @@ function parse_transmission!(bitstream)
         else
             # Packet is an operator acting on subpackets
             length_type_id = popfirst!(bitstream)
-            subpackets = Vector{Tuple{Int, Int}}()
+            subpackets = Vector{Tuple{Int,Int}}()
             if length_type_id == '0'
                 # Parse subpacket by length of bits
                 subpacket_length = bin2num(splice!(bitstream, 1:15))
@@ -87,7 +85,6 @@ end
 solve1(::Day{16}, data) = first(parse_transmission!(deepcopy(data)))
 # Part 2 – return value
 solve2(::Day{16}, data) = last(parse_transmission!(deepcopy(data)))
-
 
 # No test for for both parts, just pass:
 testresult1(::Day{16}) = 0
