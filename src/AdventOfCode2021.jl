@@ -1,7 +1,7 @@
 module AdventOfCode2021
 using Printf
 
-const CURRENT_DAY = 17
+const CURRENT_DAY = 18
 
 include("dispatch.jl")
 for day in 1:CURRENT_DAY
